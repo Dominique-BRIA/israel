@@ -316,17 +316,12 @@
         <!-- La carte de présentation de l'élève -->
         <article class="carte-eleve">
 
-          <!-- Emplacement réservé pour la photo (aucune photo inventée).
-               POUR AJOUTER TA PHOTO :
-               1. Dépose ton image dans assets/images/ (nom : photo-eleve.jpg)
-               2. Remplace tout le contenu de .cadre-photo par :
-                  <img src="assets/images/photo-eleve.jpg"
-                       alt="Portrait de GNIZO GREZOUALI ISRAEL">
-               Le CSS la découpera automatiquement en cercle. -->
-          <img src="assets/images/photo-eleve.jpg"
-                       alt="Portrait de GNIZO GREZOUALI ISRAEL">
-            <svg class="icone icone-photo" aria-hidden="true"><use href="#i-camera"></use></svg>
-            <span class="cadre-photo-texte">Ma photo</span>
+                    <!-- La photo de l'élève : assets/images/photo-eleve.jpg.
+               Le cadre .cadre-photo est le « découpeur » : c'est LUI qui
+               découpe l'image en cercle (object-fit: cover, cf. CSS). -->
+          <div class="cadre-photo">
+            <img src="assets/images/photo-eleve.jpg"
+                 alt="Portrait de GNIZO GREZOUALI ISRAEL">
           </div>
 
           <p class="nom-eleve">GNIZO GREZOUALI ISRAEL</p>
