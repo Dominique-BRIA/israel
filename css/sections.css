@@ -1,0 +1,1083 @@
+/* ============================================================
+   SECTIONS.CSS — les styles propres à chaque section
+   ------------------------------------------------------------
+   Contenu :
+     1. Accueil (hero)
+     2. Notre mission
+     3. Les outils (fiches, capacités, démos, fenêtre de code)
+     4. Curseur Avant / Après
+     5. Une même idée, trois IA
+     6. Expérimentons ! (onglets)
+     7. Comparaison (tableau)
+     8. Ce que nous avons appris (leçons)
+     9. Les limites de l'IA (style « attention »)
+
+   Règle d'or de l'organisation :
+     style.css    = les fondations (variables, reset, navbar…)
+     sections.css = le « mobilier » propre à chaque section
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   En-tête commun des sections (surtitre + titre + intro)
+   ------------------------------------------------------------ */
+.entete-section {
+  max-width: 46rem;
+  margin-bottom: 2.75rem;
+}
+
+.surtitre-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-general);
+}
+
+.entete-section h2 {
+  margin-top: 0.4rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+}
+
+.entete-section p {
+  margin-top: 0.9rem;
+  color: var(--couleur-texte-doux);
+}
+
+/* ============================================================
+   1. ACCUEIL (hero)
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 5.5rem 0;
+  /* Deux halos lumineux (dégradés radiaux) en décor */
+  background:
+    radial-gradient(42rem 20rem at 85% 15%, rgba(139, 156, 249, 0.14), transparent 70%),
+    radial-gradient(30rem 24rem at 5% 90%, rgba(45, 212, 191, 0.10), transparent 70%);
+}
+
+/* GRID = « je place des zones sur un quadrillage »
+   (alors que FLEX = « j'aligne des objets sur une ligne »). */
+.hero-grille {
+  display: grid;
+  grid-template-columns: 340px 1fr; /* carte fixe + zone texte flexible */
+  gap: 3rem;
+  align-items: center;
+}
+
+/* ── La carte de l'élève ── */
+.carte-eleve {
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* L'emplacement réservé pour la photo */
+.cadre-photo {
+  width: 132px;
+  height: 132px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  border: 2px dashed var(--couleur-bord);
+  background-color: rgba(127, 145, 200, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: var(--couleur-texte-doux);
+}
+
+.cadre-photo .icone-photo {
+  width: 2.1rem;
+  height: 2.1rem;
+  opacity: 0.8;
+}
+
+/* Le jour où la vraie photo arrive (balise <img>), ces règles
+   la découperont automatiquement en cercle */
+.cadre-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* l'image remplit le cercle sans se déformer */
+  border-radius: 50%;
+}
+
+.cadre-photo-texte {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nom-eleve {
+  font-family: var(--police-titres);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.classe-eleve {
+  margin-top: 0.35rem;
+  color: var(--accent-general);
+  font-weight: 600;
+}
+
+/* Les petites « pilules » d'information */
+.liste-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.badge {
+  font-size: 0.78rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--couleur-bord);
+  color: var(--couleur-texte-doux);
+  background-color: rgba(127, 145, 200, 0.06);
+}
+
+/* La courte présentation (citation) */
+.presentation-eleve {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--couleur-bord);
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--couleur-texte-doux);
+}
+
+/* ── Le titre du projet ── */
+.hero-surtitre {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-general);
+  border: 1px solid var(--couleur-bord);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+}
+
+.hero-surtitre .icone { width: 1em; height: 1em; }
+
+.hero-titre {
+  margin-top: 1.25rem;
+  font-size: clamp(2rem, 4.5vw, 3.3rem); /* taille « liquide » */
+}
+
+.mot-ia { color: var(--accent-general); }
+
+.hero-phrase {
+  margin-top: 1rem;
+  max-width: 34rem;
+  font-size: 1.12rem;
+  color: var(--couleur-texte-doux);
+}
+
+/* ── Adaptation téléphone ── */
+@media (max-width: 800px) {
+  .hero-grille { grid-template-columns: 1fr; }
+
+  .carte-eleve {
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  .hero-texte { text-align: center; }
+
+  .hero-phrase {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-surtitre { display: inline-flex; } /* reste en pilule même centrée */
+}
+
+/* ============================================================
+   2. NOTRE MISSION
+   ============================================================ */
+.grille-domaines {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 parts égales */
+  gap: 1.25rem;
+}
+
+/* Toute la carte est un lien (<a>) */
+.carte-domaine {
+  display: block;
+  padding: 1.75rem 1.5rem;
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+  text-decoration: none;
+  color: var(--couleur-texte);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carte-domaine:hover {
+  transform: translateY(-6px); /* la carte « décolle » */
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+}
+
+/* Chaque outil a SA couleur, déclarée en variable (style.css) */
+.carte-domaine.outil-texte { border-top: 3px solid var(--accent-chatgpt); }
+.carte-domaine.outil-image { border-top: 3px solid var(--accent-nano-banana); }
+.carte-domaine.outil-code  { border-top: 3px solid var(--accent-claude); }
+
+/* Le carré d'icône teinté aux couleurs de l'outil */
+.icone-domaine {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+}
+
+.icone-domaine .icone { width: 1.6rem; height: 1.6rem; }
+
+.outil-texte .icone-domaine { background: rgba(45, 212, 191, 0.12); color: var(--accent-chatgpt); }
+.outil-image .icone-domaine { background: rgba(251, 191, 36, 0.12); color: var(--accent-nano-banana); }
+.outil-code  .icone-domaine { background: rgba(251, 146, 60, 0.12); color: var(--accent-claude); }
+
+.domaine-nom {
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.outil-texte .domaine-nom { color: var(--accent-chatgpt); }
+.outil-image .domaine-nom { color: var(--accent-nano-banana); }
+.outil-code  .domaine-nom { color: var(--accent-claude); }
+
+.outil-nom {
+  margin-top: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.outil-desc {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--couleur-texte-doux);
+}
+
+.carte-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--couleur-texte-doux);
+}
+
+.carte-domaine:hover .carte-lien { color: var(--couleur-texte); }
+
+@media (max-width: 900px) {
+  .grille-domaines {
+    grid-template-columns: 1fr;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+}
+
+/* ============================================================
+   3. LES OUTILS — fiches détaillées
+   ============================================================ */
+.fiche-outil {
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+  padding: 2.25rem;
+  margin-bottom: 2.5rem;
+}
+
+/* La couleur du haut de fiche, selon l'outil */
+.fiche-outil.outil-texte { border-top: 4px solid var(--accent-chatgpt); }
+.fiche-outil.outil-image { border-top: 4px solid var(--accent-nano-banana); }
+.fiche-outil.outil-code  { border-top: 4px solid var(--accent-claude); }
+
+/* En-tête de fiche : grand carré d'icône + titre */
+.fiche-entete {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.fiche-entete .domaine-nom { margin-top: 0; }
+
+.fiche-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1.1rem;
+  flex: none;
+}
+
+.fiche-icone .icone { width: 2rem; height: 2rem; }
+
+.outil-texte .fiche-icone { background: rgba(45, 212, 191, 0.12); color: var(--accent-chatgpt); }
+.outil-image .fiche-icone { background: rgba(251, 191, 36, 0.12); color: var(--accent-nano-banana); }
+.outil-code  .fiche-icone { background: rgba(251, 146, 60, 0.12); color: var(--accent-claude); }
+
+.fiche-titre {
+  font-size: 1.55rem;
+}
+
+.fiche-accroche {
+  color: var(--couleur-texte-doux);
+  font-size: 0.95rem;
+}
+
+/* Les intertitres dans une fiche */
+.fiche-outil h4 {
+  margin-top: 2rem;
+  margin-bottom: 0.9rem;
+  font-size: 1.08rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.fiche-outil h4::before {
+  content: "";
+  width: 1.4rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-general);
+}
+
+/* La couleur de l'intertitre, selon l'outil */
+.fiche-outil.outil-texte h4::before { background: var(--accent-chatgpt); }
+.fiche-outil.outil-image h4::before { background: var(--accent-nano-banana); }
+.fiche-outil.outil-code  h4::before { background: var(--accent-claude); }
+
+.fiche-outil > p {
+  color: var(--couleur-texte-doux);
+  max-width: 52rem;
+}
+
+/* Grille des capacités : auto-fit = « autant de colonnes que
+   possible, largeur minimale 150px » → s'adapte tout seul */
+.grille-capacites {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.capacite {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 0.95rem;
+  background-color: var(--couleur-fond);
+  border: 1px solid var(--couleur-bord);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.capacite .icone {
+  color: var(--couleur-texte-doux);
+}
+
+.outil-texte .capacite .icone { color: var(--accent-chatgpt); }
+.outil-image .capacite .icone { color: var(--accent-nano-banana); }
+.outil-code  .capacite .icone { color: var(--accent-claude); }
+
+/* ── Les boîtes prompt / réponse ── */
+.boite-prompt,
+.boite-reponse {
+  border-radius: var(--rayon-carte);
+  padding: 1.1rem 1.35rem;
+  margin-bottom: 1rem;
+  max-width: 52rem;
+}
+
+.boite-prompt {
+  border: 1px dashed var(--accent-general);
+  background-color: rgba(139, 156, 249, 0.07);
+}
+
+.boite-reponse {
+  border: 1px solid var(--couleur-bord);
+  background-color: var(--couleur-fond);
+}
+
+.boite-etiquette {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--couleur-texte-doux);
+  margin-bottom: 0.5rem;
+}
+
+.boite-prompt .boite-etiquette { color: var(--accent-general); }
+.boite-prompt > p:last-child { font-style: italic; }
+.boite-reponse > p:last-child { color: var(--couleur-texte-doux); }
+
+/* ── Les listes à puces iconées (limites, explications) ── */
+.liste-points {
+  display: grid;
+  gap: 0.65rem;
+  max-width: 52rem;
+}
+
+.liste-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  color: var(--couleur-texte-doux);
+}
+
+.liste-points li .icone {
+  margin-top: 0.22em;
+  color: var(--accent-general);
+}
+
+.liste-points code {
+  font-family: var(--police-code);
+  background-color: rgba(127, 145, 200, 0.14);
+  padding: 0.08em 0.4em;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+/* ── La figure de démonstration (image) ── */
+.figure-demo {
+  max-width: 30rem;
+}
+
+.figure-demo img {
+  border-radius: var(--rayon-carte);
+  border: 1px solid var(--couleur-bord);
+}
+
+.figure-demo figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--couleur-texte-doux);
+}
+
+/* ── La fenêtre de code (avec Prism pour la coloration) ── */
+.fenetre-code {
+  border-radius: var(--rayon-carte);
+  overflow: hidden;
+  border: 1px solid var(--couleur-bord);
+  max-width: 52rem;
+}
+
+.fenetre-code-entete {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  background-color: #1a2438;
+  color: #9fb0d0;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--couleur-bord);
+}
+
+.fenetre-code-entete .icone { width: 1em; height: 1em; }
+
+.fenetre-code-langage {
+  margin-left: auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--couleur-bord);
+}
+
+/* On adapte le fond du thème Prism à notre palette
+   (le code reste sur fond sombre, même en thème clair) */
+.fenetre-code pre {
+  margin: 0;
+  background-color: #0d1526 !important;
+}
+
+.fenetre-code code[class*="language-"],
+.fenetre-code pre[class*="language-"] {
+  font-family: var(--police-code);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  text-shadow: none;
+}
+
+.fenetre-code-mini pre { font-size: 0.78rem; }
+
+/* ── Le bouton « Voir l'explication » ── */
+.bouton-explication {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent-claude);
+  background-color: transparent;
+  color: var(--accent-claude);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.bouton-explication:hover {
+  background-color: rgba(251, 146, 60, 0.1);
+}
+
+/* La flèche tourne quand l'explication est ouverte */
+.bouton-explication[aria-expanded="true"] .icone {
+  transform: rotate(180deg);
+}
+
+.bouton-explication .icone { transition: transform 0.25s ease; }
+
+/* Le panneau d'explication : caché par défaut, ouvert avec la
+   classe .ouvert (posée par js/outils.js) */
+.explication {
+  display: none;
+  margin-top: 1.25rem;
+  padding: 1.35rem 1.5rem;
+  border: 1px solid rgba(251, 146, 60, 0.4);
+  border-radius: var(--rayon-carte);
+  background-color: rgba(251, 146, 60, 0.05);
+  max-width: 52rem;
+}
+
+.explication.ouvert { display: block; }
+
+.explication h4 { margin-top: 0; }
+
+.explication .liste-points li .icone { color: var(--accent-claude); }
+
+/* ============================================================
+   4. LE CURSEUR AVANT / APRÈS
+   Principe : les deux images sont superposées ; celle de
+   « avant » est rognée par clip-path selon la position du
+   curseur (un <input type="range"> invisible recouvre tout).
+   ============================================================ */
+.compare {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--rayon-carte);
+  border: 1px solid var(--couleur-bord);
+  max-width: 34rem;
+  user-select: none;
+  touch-action: none;
+}
+
+.compare img {
+  width: 100%;
+  display: block;
+}
+
+/* La version « avant » est posée par-dessus l'« après », puis
+   rognée par JS (clip-path) selon la position du curseur */
+.compare-avant {
+  position: absolute;
+  inset: 0;
+}
+
+.compare-avant img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* La ligne + la poignée du curseur */
+.compare-poignee {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+  pointer-events: none; /* elle ne bloque pas la souris */
+}
+
+.compare-bouton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #0b1220;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+.compare-bouton .icone { width: 1.25rem; height: 1.25rem; }
+
+/* Le range invisible : il couvre TOUTE la zone, donc on peut
+   faire glisser n'importe où. Les flèches du clavier marchent
+   aussi quand il a le focus. */
+.compare-curseur {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.compare-etiquette {
+  position: absolute;
+  top: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background-color: rgba(11, 18, 32, 0.75);
+  color: #ffffff;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.compare-etiquette-avant { left: 0.75rem; }
+.compare-etiquette-apres { right: 0.75rem; }
+
+.note-compare {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--couleur-texte-doux);
+}
+
+/* ============================================================
+   5. UNE MÊME IDÉE, TROIS IA
+   ============================================================ */
+.idee-origine {
+  max-width: 26rem;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+  background-color: var(--couleur-surface);
+}
+
+.idee-origine .domaine-nom { margin-top: 0.9rem; color: var(--accent-general); }
+
+.idee-origine-prec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  font-weight: 600;
+  color: var(--couleur-texte-doux);
+}
+
+.idee-origine-prec .icone { color: var(--accent-general); }
+
+/* Trois flèches, une par colonne de résultat */
+.idee-fleches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  padding: 1rem 0;
+  color: var(--couleur-texte-doux);
+}
+
+.idee-resultats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.idee-carte {
+  padding: 1.4rem 1.3rem;
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+}
+
+.idee-carte.outil-texte { border-top: 3px solid var(--accent-chatgpt); }
+.idee-carte.outil-image { border-top: 3px solid var(--accent-nano-banana); }
+.idee-carte.outil-code  { border-top: 3px solid var(--accent-claude); }
+
+.idee-entete {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.idee-entete .icone { width: 1.5rem; height: 1.5rem; }
+
+.idee-carte.outil-texte .idee-entete .icone { color: var(--accent-chatgpt); }
+.idee-carte.outil-image .idee-entete .icone { color: var(--accent-nano-banana); }
+.idee-carte.outil-code  .idee-entete .icone { color: var(--accent-claude); }
+
+.idee-entete h3 { font-size: 1.05rem; }
+.idee-entete .domaine-nom { margin-top: 0.1rem; }
+
+.idee-resultat-texte {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--couleur-texte-doux);
+}
+
+.idee-resultat-image {
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--couleur-bord);
+}
+
+.idee-carte .fenetre-code { margin-top: 1rem; }
+
+/* La phrase de conclusion sous les trois résultats */
+.idee-conclusion {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-top: 2.5rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: var(--rayon-carte);
+  border: 1px solid var(--couleur-bord);
+  background-color: var(--couleur-surface);
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--couleur-texte-doux);
+}
+
+.idee-conclusion .icone {
+  color: var(--accent-general);
+  margin-top: 0.2em;
+  flex: none;
+}
+
+@media (max-width: 900px) {
+  .idee-fleches { display: none; } /* résultats empilés : pas de flèches */
+  .idee-resultats { grid-template-columns: 1fr; max-width: 430px; margin: 0 auto; }
+}
+
+/* ============================================================
+   6. EXPÉRIMENTONS ! (onglets)
+   ============================================================ */
+.onglets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+
+.onglet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid var(--couleur-bord);
+  background-color: var(--couleur-surface);
+  color: var(--couleur-texte-doux);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.onglet:hover { color: var(--couleur-texte); }
+
+/* L'onglet actif prend la couleur de son outil */
+.onglet.actif[data-outil="texte"] {
+  color: var(--accent-chatgpt);
+  border-color: var(--accent-chatgpt);
+  background-color: rgba(45, 212, 191, 0.08);
+}
+
+.onglet.actif[data-outil="image"] {
+  color: var(--accent-nano-banana);
+  border-color: var(--accent-nano-banana);
+  background-color: rgba(251, 191, 36, 0.08);
+}
+
+.onglet.actif[data-outil="code"] {
+  color: var(--accent-claude);
+  border-color: var(--accent-claude);
+  background-color: rgba(251, 146, 60, 0.08);
+}
+
+/* Un seul panneau visible à la fois */
+.panneau {
+  display: none;
+  animation: apparition 0.35s ease;
+}
+
+.panneau.actif { display: block; }
+
+@keyframes apparition {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.experience-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 2rem;
+  margin-bottom: 1.25rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: 10px;
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  font-size: 0.92rem;
+}
+
+.panneau h4 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.panneau > p {
+  max-width: 52rem;
+  color: var(--couleur-texte-doux);
+}
+
+/* L'encadré « ce que cette expérience nous apprend » */
+.apprentissage {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--rayon-carte);
+  border: 1px solid rgba(139, 156, 249, 0.4);
+  background: linear-gradient(135deg, rgba(139, 156, 249, 0.10), rgba(139, 156, 249, 0.03));
+  max-width: 52rem;
+}
+
+.apprentissage .icone {
+  color: var(--accent-general);
+  margin-top: 0.2em;
+  flex: none;
+}
+
+.apprentissage p { color: var(--couleur-texte); }
+
+/* ============================================================
+   7. COMPARAISON (tableau)
+   ============================================================ */
+.tableau-ombre {
+  overflow-x: auto; /* sur mobile, le tableau défile horizontalement */
+  border: 1px solid var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+  background-color: var(--couleur-surface);
+}
+
+.tableau-comparatif {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+.tableau-comparatif th,
+.tableau-comparatif td {
+  padding: 0.95rem 1.1rem;
+  text-align: center;
+  border-top: 1px solid var(--couleur-bord);
+}
+
+.tableau-comparatif thead th {
+  border-top: none;
+  font-family: var(--police-titres);
+  font-size: 0.98rem;
+}
+
+.tableau-comparatif tbody th {
+  border-top: 1px solid var(--couleur-bord);
+}
+
+/* La colonne des fonctionnalités */
+.tableau-comparatif tbody th[scope="row"],
+.tableau-comparatif thead th:first-child {
+  text-align: left;
+}
+
+.tableau-comparatif thead th:first-child { color: var(--couleur-texte-doux); font-size: 0.8rem; }
+
+/* Chaque colonne d'outil garde sa couleur */
+.col-chatgpt { color: var(--accent-chatgpt); }
+.col-nano    { color: var(--accent-nano-banana); }
+.col-claude  { color: var(--accent-claude); }
+
+/* Les cellules Oui / Non (icônes) */
+.cellule-oui .icone { color: #34d399; width: 1.35rem; height: 1.35rem; }
+.cellule-non .icone { color: var(--couleur-texte-doux); opacity: 0.45; width: 1.35rem; height: 1.35rem; }
+
+.tableau-comparatif tbody tr:hover {
+  background-color: rgba(127, 145, 200, 0.06);
+}
+
+.note-comparaison {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  max-width: 46rem;
+  color: var(--couleur-texte-doux);
+}
+
+.note-comparaison .icone {
+  color: var(--accent-nano-banana);
+  margin-top: 0.22em;
+  flex: none;
+}
+
+/* ============================================================
+   8. CE QUE NOUS AVONS APPRIS (leçons)
+   ============================================================ */
+.liste-lecons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  counter-reset: lecon; /* notre compteur personnalisé */
+}
+
+.lecon {
+  padding: 1.5rem 1.4rem;
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+  counter-increment: lecon;
+}
+
+/* Le grand numéro, généré par CSS ! */
+.lecon::before {
+  content: counter(lecon, decimal-leading-zero);
+  display: block;
+  font-family: var(--police-titres);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent-general);
+  opacity: 0.45;
+}
+
+.lecon .icone {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--accent-general);
+  margin-top: 0.6rem;
+}
+
+.lecon h3 {
+  margin-top: 0.55rem;
+  font-size: 1.02rem;
+}
+
+.lecon p {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--couleur-texte-doux);
+}
+
+/* ============================================================
+   9. LES LIMITES DE L'IA (style « attention », volontairement
+   différent du reste du site pour marquer les esprits)
+   ============================================================ */
+.section-limites {
+  background:
+    radial-gradient(38rem 18rem at 50% 0%, rgba(245, 158, 11, 0.09), transparent 70%),
+    var(--couleur-fond);
+  border-top: 3px solid #f59e0b;
+}
+
+.entete-limites {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.surtitre-limites {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f59e0b;
+}
+
+.surtitre-limites .icone { width: 1.1em; height: 1.1em; }
+
+.entete-limites h2 {
+  margin-top: 0.5rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+}
+
+.citation-limites {
+  font-family: var(--police-titres);
+  font-size: clamp(1.25rem, 2.8vw, 1.85rem);
+  font-weight: 700;
+  text-align: center;
+  max-width: 46rem;
+  margin: 2.25rem auto;
+  padding: 0 1rem;
+  line-height: 1.4;
+}
+
+.liste-limites {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.item-limite {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--rayon-carte);
+  background-color: rgba(245, 158, 11, 0.06);
+  font-size: 0.95rem;
+}
+
+.item-limite .icone {
+  color: #f59e0b;
+  margin-top: 0.22em;
+  flex: none;
+}
+
+.note-limites {
+  margin-top: 2.5rem;
+  text-align: center;
+  color: var(--couleur-texte-doux);
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}

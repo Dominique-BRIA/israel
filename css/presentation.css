@@ -1,0 +1,139 @@
+/* ============================================================
+   PRESENTATION.CSS — le mode présentation (bouton « Présentation »)
+   ------------------------------------------------------------
+   Principe (à savoir expliquer le jour de l'exposé !) :
+   1. js/presentation.js pose la classe « mode-presentation »
+      sur <body> quand on active le mode.
+   2. Ce CSS réagit à cette classe : il masque la navbar, le
+      pied de page, et toutes les sections SAUF celle qui porte
+      la classe « diapo-active » (la diapositive courante).
+   3. La typographie est agrandie (118 %) pour être lisible du
+      fond de la salle.
+   4. Une barre de contrôle flottante apparaît en bas, avec les
+      boutons précédent / suivant / quitter, et le compteur.
+   5. Le clavier pilote tout : ← précédent, → suivant, Esc quitter.
+   ------------------------------------------------------------ */
+
+/* La page entière passe en « mode exposé » */
+body.mode-presentation {
+  font-size: 118%; /* toutes les tailles en rem grandissent avec */
+}
+
+/* On masque tout ce qui distrait */
+body.mode-presentation .navbar,
+body.mode-presentation .pied-de-page,
+body.mode-presentation .lien-evitement {
+  display: none;
+}
+
+/* Toutes les sections sont cachées… */
+body.mode-presentation main > section {
+  display: none;
+}
+
+/* …sauf la diapositive active (la classe est posée par JS) */
+body.mode-presentation main > section.diapo-active {
+  display: block;
+  min-height: 100vh;
+  padding: 5rem 0 9rem; /* de l'air en haut, plus pour la barre */
+  border-top: none;
+}
+
+/* Dans la section « Les outils », une seule fiche à la fois */
+body.mode-presentation .fiche-outil {
+  display: none;
+}
+
+body.mode-presentation .fiche-outil.diapo-active {
+  display: block;
+  margin-bottom: 0;
+}
+
+/* Le hero garde ses halos mais monte un peu */
+body.mode-presentation .hero {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/* Les titres de section, encore un peu plus grands */
+body.mode-presentation .entete-section h2,
+body.mode-presentation .entete-limites h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+/* ------------------------------------------------------------
+   LA BARRE DE CONTRÔLE (cachée hors mode présentation)
+   ------------------------------------------------------------ */
+.barre-presentation {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  display: none; /* par défaut invisible */
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  border-radius: 999px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+}
+
+body.mode-presentation .barre-presentation {
+  display: flex; /* visible uniquement en mode présentation */
+}
+
+.btn-diapo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: var(--couleur-texte);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-diapo:hover {
+  background-color: rgba(127, 145, 200, 0.14);
+  border-color: var(--couleur-bord);
+}
+
+.diapo-compteur {
+  font-size: 0.92rem;
+  color: var(--couleur-texte-doux);
+  padding: 0 0.5rem;
+  font-variant-numeric: tabular-nums; /* les chiffres s'alignent */
+}
+
+.diapo-separateur {
+  width: 1px;
+  height: 1.5rem;
+  background-color: var(--couleur-bord);
+}
+
+/* Le petit rappel des touches, en haut à droite */
+.diapo-aide {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 300;
+  display: none;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  color: var(--couleur-texte-doux);
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bord);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  opacity: 0.85;
+}
+
+body.mode-presentation .diapo-aide {
+  display: inline-flex;
+}

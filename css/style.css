@@ -1,0 +1,449 @@
+/* ============================================================
+   STYLE.CSS — les fondations du design
+   ------------------------------------------------------------
+   Contenu :
+     0. Les polices locales (@font-face)
+     1. Les variables CSS  → le « panneau de réglages » du site
+        (+ le thème clair : mêmes variables, autres valeurs)
+     2. La remise à zéro   → un point de départ propre
+     3. La base            → corps de page, typographie, icônes
+     4. Les utilitaires    → .conteneur, .sr-only, .reveal…
+     5. La navbar          → liens, boutons, menu mobile
+     6. Le pied de page
+     7. Les boutons        → .bouton-principal (réutilisable)
+   ------------------------------------------------------------
+   NB : les noms (classes, variables) sont volontairement en
+   français et SANS ACCENTS (annee, idee...) pour faciliter la
+   compréhension. Dans le monde professionnel on écrit plutôt
+   en anglais : c'est une convention d'équipe, pas une
+   obligation technique.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   0. POLICES LOCALES (@font-face)
+   Les fichiers .woff2 sont stockés dans assets/fonts/ : le site
+   garde sa typographie même sans connexion Internet.
+   - Le chemin "../assets/fonts/..." est RELATIF à ce fichier
+     CSS : « remonte d'un cran (de css/ vers la racine), puis
+     entre dans assets/fonts/ ».
+   - Ce sont des polices VARIABLES : un seul fichier contient
+     toutes les graisses (fin, normal, gras…), d'où la plage
+     « font-weight: 300 700 » qui signifie « de 300 à 700 ».
+   - font-display: swap : le texte s'affiche immédiatement avec
+     une police de repli, puis la vraie police prend le relais.
+   ------------------------------------------------------------ */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/space-grotesk.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------
+   1. VARIABLES CSS — le « panneau de réglages » du site
+   Une variable se déclare avec -- et s'utilise avec var(...).
+   Changer la valeur ICI la change PARTOUT.
+   ------------------------------------------------------------ */
+:root {
+  /* Couleurs de base — thème sombre « nuit technologique » */
+  --couleur-fond: #0b1220;        /* le fond général (bleu nuit) */
+  --couleur-surface: #141d31;    /* les blocs : navbar, cartes… */
+  --couleur-bord: #263350;       /* les bordures discrètes */
+  --couleur-texte: #eaeff9;      /* le texte principal */
+  --couleur-texte-doux: #9fb0d0; /* le texte secondaire */
+
+  /* Une couleur d'accent par outil */
+  --accent-chatgpt: #2dd4bf;      /* texte : vert d'eau */
+  --accent-nano-banana: #fbbf24;  /* image : jaune doré */
+  --accent-claude: #fb923c;       /* code : orange corail */
+  --accent-general: #8b9cf9;      /* indigo, pour le reste du site */
+
+  /* Une variable CSS peut même contenir un dégradé entier ! */
+  --degrade-accent: linear-gradient(135deg, #8b9cf9, #6d7ef7);
+
+  /* Polices — chargées en local par les @font-face ci-dessus.
+     Après chaque nom, on liste des polices DE REPLI : si le
+     fichier .woff2 n'était pas trouvé, le navigateur prendrait
+     celles du système (c'est la « pile » de polices). */
+  --police-titres: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  --police-texte: "Inter", "Segoe UI", Arial, sans-serif;
+  --police-code: Consolas, "Cascadia Code", Menlo, monospace;
+
+  /* Géométrie */
+  --rayon-carte: 14px;   /* l'arrondi des coins */
+  --largeur-max: 1100px; /* la largeur maximale du contenu */
+}
+
+/* THÈME CLAIR — le bouton de la navbar pose l'attribut
+   data-theme="clair" sur <html>. Mêmes variables, autres
+   valeurs : tout le site change d'ambiance instantanément.
+   C'est TOUT l'intérêt d'avoir tout branché sur des variables. */
+:root[data-theme="clair"] {
+  --couleur-fond: #f3f5fb;
+  --couleur-surface: #ffffff;
+  --couleur-bord: #dbe2f0;
+  --couleur-texte: #1a2340;
+  --couleur-texte-doux: #5a6a8c;
+
+  /* Accents légèrement foncés pour rester lisibles sur fond clair */
+  --accent-chatgpt: #0d9488;
+  --accent-nano-banana: #b45309;
+  --accent-claude: #c2410c;
+  --accent-general: #5c6bcf;
+  --degrade-accent: linear-gradient(135deg, #6d7ef7, #4f5ee8);
+}
+
+/* ------------------------------------------------------------
+   2. REMISE À ZÉRO (minimale)
+   Chaque navigateur applique ses propres marges par défaut.
+   On repart de zéro pour que le site s'affiche pareil partout.
+   ------------------------------------------------------------ */
+* {
+  box-sizing: border-box; /* les padding ne gonflent plus les largeurs */
+}
+
+body, h1, h2, h3, h4, p, ul, ol, blockquote, figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none; /* on retire les puces ; on les remettra si besoin */
+}
+
+img {
+  max-width: 100%;   /* une image ne peut jamais dépasser son conteneur */
+  display: block;
+}
+
+button {
+  font: inherit;     /* les boutons héritent de la police de la page */
+  color: inherit;
+}
+
+/* ------------------------------------------------------------
+   3. BASE
+   ------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth; /* le défilement vers les ancres est animé */
+}
+
+body {
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+  font-family: var(--police-texte);
+  line-height: 1.6; /* un interligne confortable pour la lecture */
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--police-titres);
+  line-height: 1.25;
+}
+
+section {
+  padding: 4.5rem 0; /* de l'espace, beaucoup d'espace */
+}
+
+/* Quand on saute vers une ancre, on laisse de la place pour la
+   navbar collante (sinon le titre passe dessous) */
+section[id],
+.fiche-outil[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Un fin trait séparateur entre les sections */
+main > section + section {
+  border-top: 1px solid var(--couleur-bord);
+}
+
+/* Les icônes (bibliothèque Lucide, intégrée en SVG).
+   width/height en « em » : l'icône suit la taille du texte.
+   stroke hérite de « currentColor » : l'icône prend la couleur
+   du texte autour d'elle — pratique pour les hover ! */
+.icone {
+  width: 1.2em;
+  height: 1.2em;
+  flex: none;
+  vertical-align: -0.22em;
+}
+
+.icone-lg {
+  width: 1.7em;
+  height: 1.7em;
+}
+
+/* ------------------------------------------------------------
+   4. UTILITAIRES
+   ------------------------------------------------------------ */
+/* .conteneur : limite la largeur du contenu et le centre */
+.conteneur {
+  max-width: var(--largeur-max);
+  margin: 0 auto;     /* centré horizontalement */
+  padding: 0 1.5rem;  /* un peu d'air sur les bords (téléphones) */
+}
+
+/* .sr-only : texte destiné aux lecteurs d'écran (invisible à
+   l'écran). Permet d'annoncer « Oui » / « Non » dans le tableau. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* .en-attente : encadré provisoire (si tu ajoutes une section
+   plus tard, tu peux le réutiliser). */
+.en-attente {
+  border: 2px dashed var(--couleur-bord);
+  border-radius: var(--rayon-carte);
+  color: var(--couleur-texte-doux);
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Lien d'évitement (accessibilité clavier) : invisible, sauf
+   quand il reçoit le focus avec la touche Tab */
+.lien-evitement {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 400;
+  padding: 0.6rem 1rem;
+  background: var(--accent-general);
+  color: #0b1220;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transform: translateY(-300%); /* hors écran */
+  transition: transform 0.2s ease;
+}
+
+.lien-evitement:focus {
+  transform: none; /* il glisse dans l'écran quand on tabule */
+}
+
+/* Apparition en douceur au défilement.
+   Le JavaScript (main.js) ajoute la classe .visible quand
+   l'élément entre dans l'écran (IntersectionObserver). */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect des personnes sensibles au mouvement : on désactive
+   l'animation si le système le demande (réglage du navigateur) */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ------------------------------------------------------------
+   5. NAVBAR
+   ------------------------------------------------------------ */
+.navbar {
+  position: sticky; /* la barre reste visible en haut quand on défile */
+  top: 0;
+  z-index: 200;    /* elle passe au-dessus du contenu */
+  background-color: var(--couleur-surface);
+  border-bottom: 1px solid var(--couleur-bord);
+}
+
+.navbar-interieur {
+  display: flex;                  /* alignement en ligne */
+  align-items: center;            /* centré verticalement */
+  justify-content: space-between; /* marque à gauche, actions à droite */
+  flex-wrap: wrap;                /* sur petit écran : on passe à la ligne */
+  gap: 0.5rem 1rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--police-titres);
+  font-weight: 700;
+  color: var(--couleur-texte);
+  text-decoration: none;
+}
+
+.marque .icone { color: var(--accent-general); }
+
+.nav-liens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+}
+
+.nav-liens a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--couleur-texte-doux);
+  text-decoration: none;
+  font-size: 0.93rem;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-liens a .icone { opacity: 0.75; }
+
+.nav-liens a:hover {
+  color: var(--couleur-texte); /* le lien s'éclaircit au survol */
+}
+
+/* Lien actif : le JavaScript « espionne » la section visible et
+   pose la classe .actif sur le lien correspondant */
+.nav-liens a.actif {
+  color: var(--couleur-texte);
+  border-bottom-color: var(--accent-general);
+}
+
+/* Les boutons ronds de la navbar (thème, burger) */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid var(--couleur-bord);
+  background-color: transparent;
+  color: var(--couleur-texte-doux);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-icone:hover {
+  color: var(--couleur-texte);
+  border-color: var(--couleur-texte-doux);
+}
+
+/* Thème clair / sombre : une seule des deux icônes est visible,
+   selon l'attribut data-theme posé sur <html> */
+.btn-theme .icone-lune,
+.btn-theme .icone-soleil { display: none; }
+
+:root:not([data-theme="clair"]) .btn-theme .icone-soleil { display: block; }
+:root[data-theme="clair"] .btn-theme .icone-lune { display: block; }
+
+.bouton-presentation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: var(--accent-general);
+  border: none;
+  color: #0b1220;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px; /* forme « pilule » */
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.bouton-presentation:hover {
+  filter: brightness(1.12); /* le bouton s'éclaircit un peu */
+}
+
+/* Bouton burger : caché sur grand écran, visible sur mobile */
+.btn-burger { display: none; }
+
+.btn-burger .icone-fermer { display: none; }
+.navbar.ouverte .btn-burger .icone-menu { display: none; }
+.navbar.ouverte .btn-burger .icone-fermer { display: block; }
+
+/* Sur écran étroit, les liens se replient dans un menu déroulant
+   ouvert par le bouton burger (main.js pose .ouverte sur .navbar) */
+@media (max-width: 1020px) {
+  .btn-burger { display: inline-flex; }
+
+  .nav-liens {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    background-color: var(--couleur-surface);
+    border-bottom: 1px solid var(--couleur-bord);
+    padding: 1rem 1.5rem 1.25rem;
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .navbar.ouverte .nav-liens { display: flex; }
+
+  .nav-liens a { font-size: 1rem; padding: 0.35rem 0; }
+}
+
+/* ------------------------------------------------------------
+   6. PIED DE PAGE
+   ------------------------------------------------------------ */
+.pied-de-page {
+  border-top: 1px solid var(--couleur-bord);
+  background-color: var(--couleur-surface);
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--couleur-texte-doux);
+  font-size: 0.9rem;
+}
+
+.pied-de-page p + p {
+  margin-top: 0.5rem;
+}
+
+/* ------------------------------------------------------------
+   7. BOUTONS
+   .bouton-principal : le bouton « appel à l'action » du site.
+   Astuce : c'est un LIEN (<a href="#ancre">) déguisé en bouton.
+   Aucun JavaScript nécessaire — le lien fait défiler la page
+   en douceur (grâce à scroll-behavior: smooth).
+   ------------------------------------------------------------ */
+.bouton-principal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.85rem 1.7rem;
+  border-radius: 999px;
+  background: var(--degrade-accent);
+  color: #0b1220;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(109, 126, 247, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Au survol, le bouton « décolle » légèrement de la page */
+.bouton-principal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(109, 126, 247, 0.45);
+}

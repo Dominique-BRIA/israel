@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!--
+  ================================================================
+  PANORAMA COMPARATIF DES OUTILS D'INTELLIGENCE ARTIFICIELLE
+  GNIZO GREZOUALI ISRAEL — Terminale A — Lycée Bilingue d'Ekounou
+  Cours d'Informatique
+
+  SITE TERMINAL (Étapes 2 à 8).
+  Une seule page, 8 sections + mode présentation.
+
+  LES 3 COUCHES DU SITE :
+    - index.html  → la structure   (le squelette)
+    - css/        → le design      (l'habillage)
+    - js/         → le comportement (les interactions)
+
+  LES ICÔNES : la bibliothèque Lucide (lucide.dev), intégrée en
+  local dans le « sprite » tout en haut du <body>. Chaque icône
+  s'utilise avec : <svg class="icone"><use href="#i-nom"></use></svg>
+  ================================================================
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="GNIZO GREZOUALI ISRAEL">
+  <meta name="description" content="Exposition interactive comparant trois outils d'intelligence artificielle : ChatGPT (texte), Nano Banana (image) et Claude (code). Projet d'Informatique — Terminale A, Lycée Bilingue d'Ekounou.">
+  <title>Panorama comparatif des outils d'intelligence artificielle</title>
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <!-- Feuilles de style : fondations, sections, mode présentation,
+       puis Prism (coloration syntaxique du code, bibliothèque locale) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/presentation.css">
+  <link rel="stylesheet" href="assets/vendor/prism/prism-tomorrow.min.css">
+</head>
+<body>
+
+<!-- ============================================================
+     BIBLIOTHÈQUE D'ICÔNES — Lucide (lucide.dev), licence ISC
+     57 icônes SVG intégrées en local : aucune connexion requise.
+     On n'utilise pas <img> pour elles : ces SVG héritent de la couleur
+     du texte (stroke="currentColor") — elles se colorent donc toutes
+     seules selon le thème et les effets de survol.
+     Utilisation : <svg class="icone"><use href="#i-nom"></use></svg>
+     (Bloc généré automatiquement : pas besoin de le lire en détail.)
+     ============================================================ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none" aria-hidden="true">
+  <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" />
+  <rect width="16" height="12" x="4" y="8" rx="2" />
+  <path d="M2 14h2" />
+  <path d="M20 14h2" />
+  <path d="M15 13v2" />
+  <path d="M9 13v2" /></symbol>
+  <symbol id="i-house" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></symbol>
+  <symbol id="i-flask-conical" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
+  <path d="M6.453 15h11.094" />
+  <path d="M8.5 2h7" /></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18" />
+  <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" />
+  <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M7 21h10" /></symbol>
+  <symbol id="i-graduation-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></symbol>
+  <symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol>
+  <symbol id="i-presentation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20" />
+  <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" />
+  <path d="m7 21 5-5 5 5" /></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" /></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
+  <circle cx="12" cy="13" r="3" /></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14" />
+  <path d="m19 12-7 7-7-7" /></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" /></symbol>
+  <symbol id="i-message-square-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+  <path d="M7 11h10" />
+  <path d="M7 15h6" />
+  <path d="M7 7h8" /></symbol>
+  <symbol id="i-message-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+  <circle cx="9" cy="9" r="2" />
+  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></symbol>
+  <symbol id="i-image-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5h6" />
+  <path d="M19 2v6" />
+  <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5" />
+  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+  <circle cx="9" cy="9" r="2" /></symbol>
+  <symbol id="i-code-xml" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4" />
+  <path d="m6 8-4 4 4 4" />
+  <path d="m14.5 4-5 16" /></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6" />
+  <path d="m8 6-6 6 6 6" /></symbol>
+  <symbol id="i-pen-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 21h8" />
+  <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="M10 9H8" />
+  <path d="M16 13H8" />
+  <path d="M16 17H8" /></symbol>
+  <symbol id="i-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v16" />
+  <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol>
+  <symbol id="i-languages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6" />
+  <path d="m4 14 6-6 2-3" />
+  <path d="M2 5h12" />
+  <path d="M7 2h1" />
+  <path d="m22 22-5-10-5 10" />
+  <path d="M14 18h6" /></symbol>
+  <symbol id="i-spell-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 15-5.5 5.5L12 18" />
+  <path d="m4 16 6-12 5.115 10.23" />
+  <path d="M6 12h8" /></symbol>
+  <symbol id="i-circle-question-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" /></symbol>
+  <symbol id="i-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" /></symbol>
+  <symbol id="i-paintbrush" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.622 17.897-10.68-2.913" />
+  <path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z" />
+  <path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15" /></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+  <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+  <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol>
+  <symbol id="i-wand-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" />
+  <path d="m14 7 3 3" />
+  <path d="M5 6v4" />
+  <path d="M19 14v4" />
+  <path d="M10 2v2" />
+  <path d="M7 8H3" />
+  <path d="M21 16h-4" />
+  <path d="M11 3H9" /></symbol>
+  <symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+  <path d="M8 6v8" /></symbol>
+  <symbol id="i-move" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20" />
+  <path d="m15 19-3 3-3-3" />
+  <path d="m19 9 3 3-3 3" />
+  <path d="M2 12h20" />
+  <path d="m5 9-3 3 3 3" />
+  <path d="m9 5 3-3 3 3" /></symbol>
+  <symbol id="i-move-horizontal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 8 4 4-4 4" />
+  <path d="M2 12h20" />
+  <path d="m6 8-4 4 4 4" /></symbol>
+  <symbol id="i-bug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-9" />
+  <path d="M14 7a4 4 0 0 1 4 4v3a6 6 0 0 1-12 0v-3a4 4 0 0 1 4-4z" />
+  <path d="M14.12 3.88 16 2" />
+  <path d="M21 21a4 4 0 0 0-3.81-4" />
+  <path d="M21 5a4 4 0 0 1-3.55 3.97" />
+  <path d="M22 13h-4" />
+  <path d="M3 21a4 4 0 0 1 3.81-4" />
+  <path d="M3 5a4 4 0 0 0 3.55 3.97" />
+  <path d="M6 13H2" />
+  <path d="m8 2 1.88 1.88" />
+  <path d="M9 7.13V6a3 3 0 1 1 6 0v1.13" /></symbol>
+  <symbol id="i-test-tube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2v17.5c0 1.4-1.1 2.5-2.5 2.5c-1.4 0-2.5-1.1-2.5-2.5V2" />
+  <path d="M8.5 2h7" />
+  <path d="M14.5 16h-5" /></symbol>
+  <symbol id="i-folder-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.7 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v4.1" />
+  <path d="m21 21-1.9-1.9" />
+  <circle cx="17" cy="17" r="3" /></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+  <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" /></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19h8" />
+  <path d="m4 17 6-6-6-6" /></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></symbol>
+  <symbol id="i-file-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="m14.5 12.5-5 5" />
+  <path d="m9.5 12.5 5 5" /></symbol>
+  <symbol id="i-search-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 8.5-5 5" />
+  <path d="m8.5 8.5 5 5" />
+  <circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.3-4.3" /></symbol>
+  <symbol id="i-image-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" x2="22" y1="2" y2="22" />
+  <path d="M10.41 10.41a2 2 0 1 1-2.83-2.83" />
+  <line x1="13.5" x2="6" y1="13.5" y2="21" />
+  <line x1="18" x2="21" y1="12" y2="15" />
+  <path d="M3.59 3.59A1.99 1.99 0 0 0 3 5v14a2 2 0 0 0 2 2h14c.55 0 1.052-.22 1.41-.59" />
+  <path d="M21 15V5a2 2 0 0 0-2-2H9" /></symbol>
+  <symbol id="i-file-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="M10 12.5 8 15l2 2.5" />
+  <path d="m14 12.5 2 2.5-2 2.5" /></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol>
+  <symbol id="i-sliders-horizontal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" /></symbol>
+  <symbol id="i-user-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 11 2 2 4-4" />
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" /></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol>
+  <symbol id="i-arrow-right-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4" />
+  <path d="M20 7H4" />
+  <path d="m8 21-4-4 4-4" />
+  <path d="M4 17h16" /></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8h.01" />
+  <path d="M12 12h.01" />
+  <path d="M14 8h.01" />
+  <path d="M16 12h.01" />
+  <path d="M18 8h.01" />
+  <path d="M6 8h.01" />
+  <path d="M7 16h10" />
+  <path d="M8 12h.01" />
+  <rect width="20" height="16" x="2" y="4" rx="2" /></symbol>
+  <symbol id="i-message-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol>
+  <symbol id="i-circle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <line x1="12" x2="12" y1="8" y2="12" />
+  <line x1="12" x2="12.01" y1="16" y2="16" /></symbol>
+</svg>
+
+  <!-- Lien d'évitement : invisible normalement, il apparaît quand on
+       navigue au clavier (touche Tab) — utile aux lecteurs d'écran -->
+  <a class="lien-evitement" href="#accueil">Aller au contenu</a>
+
+  <!-- ============================================================
+       NAVBAR — barre de navigation collée en haut.
+       Contient : la marque, les liens vers les sections, et trois
+       boutons (thème clair/sombre, mode présentation, menu mobile).
+       ============================================================ -->
+  <header class="navbar">
+    <nav class="navbar-interieur conteneur" aria-label="Navigation principale">
+
+      <a class="marque" href="#accueil">
+        <svg class="icone" aria-hidden="true"><use href="#i-bot"></use></svg>
+        Panorama IA
+      </a>
+
+      <ul class="nav-liens" id="menu-navigation">
+        <li><a href="#accueil">
+          <svg class="icone" aria-hidden="true"><use href="#i-house"></use></svg> Accueil</a></li>
+        <li><a href="#outils">
+          <svg class="icone" aria-hidden="true"><use href="#i-wrench"></use></svg> Les outils</a></li>
+        <li><a href="#experiences">
+          <svg class="icone" aria-hidden="true"><use href="#i-flask-conical"></use></svg> Expériences</a></li>
+        <li><a href="#comparaison">
+          <svg class="icone" aria-hidden="true"><use href="#i-scale"></use></svg> Comparaison</a></li>
+        <li><a href="#appris">
+          <svg class="icone" aria-hidden="true"><use href="#i-graduation-cap"></use></svg> Ce que nous avons appris</a></li>
+        <li><a href="#limites">
+          <svg class="icone" aria-hidden="true"><use href="#i-triangle-alert"></use></svg> Limites</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <!-- Bascule thème clair/sombre : deux icônes, le CSS n'affiche
+             que celle qui correspond au thème courant -->
+        <button type="button" class="btn-icone" id="btn-theme" title="Basculer le thème clair / sombre">
+          <svg class="icone icone-soleil" aria-hidden="true"><use href="#i-sun"></use></svg>
+          <svg class="icone icone-lune" aria-hidden="true"><use href="#i-moon"></use></svg>
+          <span class="sr-only">Basculer le thème clair ou sombre</span>
+        </button>
+
+        <button type="button" class="bouton-presentation" id="btn-presentation" title="Mode présentation (← → Esc)">
+          <svg class="icone" aria-hidden="true"><use href="#i-presentation"></use></svg>
+          Présentation
+        </button>
+
+        <!-- Menu « burger » : visible uniquement sur petit écran -->
+        <button type="button" class="btn-icone btn-burger" id="btn-burger"
+                aria-expanded="false" aria-controls="menu-navigation" title="Ouvrir le menu">
+          <svg class="icone icone-menu" aria-hidden="true"><use href="#i-menu"></use></svg>
+          <svg class="icone icone-fermer" aria-hidden="true"><use href="#i-x"></use></svg>
+          <span class="sr-only">Ouvrir le menu de navigation</span>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         SECTION 1 — ACCUEIL (hero)
+         ============================================================ -->
+    <section id="accueil" class="hero">
+      <div class="conteneur hero-grille">
+
+        <!-- La carte de présentation de l'élève -->
+        <article class="carte-eleve">
+
+          <!-- Emplacement réservé pour la photo (aucune photo inventée).
+               POUR AJOUTER TA PHOTO :
+               1. Dépose ton image dans assets/images/ (nom : photo-eleve.jpg)
+               2. Remplace tout le contenu de .cadre-photo par :
+                  <img src="assets/images/photo-eleve.jpg"
+                       alt="Portrait de GNIZO GREZOUALI ISRAEL">
+               Le CSS la découpera automatiquement en cercle. -->
+          <div class="cadre-photo" role="img"
+               aria-label="Emplacement réservé pour la photo de l'élève">
+            <svg class="icone icone-photo" aria-hidden="true"><use href="#i-camera"></use></svg>
+            <span class="cadre-photo-texte">Ma photo</span>
+          </div>
+
+          <p class="nom-eleve">GNIZO GREZOUALI ISRAEL</p>
+          <p class="classe-eleve">Élève en Terminale A</p>
+
+          <ul class="liste-badges">
+            <li class="badge">Lycée Bilingue d'Ekounou</li>
+            <li class="badge">Cours : Informatique</li>
+          </ul>
+
+          <p class="presentation-eleve">« Je suis GNIZO GREZOUALI ISRAEL, élève en Terminale A au Lycée Bilingue d'Ekounou. Dans le cadre du cours d'Informatique, je réalise ce projet afin d'explorer et de comparer différents outils d'intelligence artificielle dans les domaines du texte, de l'image et de la programmation. »</p>
+        </article>
+
+        <!-- Le titre du projet et le bouton -->
+        <div class="hero-texte">
+          <p class="hero-surtitre">
+            <svg class="icone" aria-hidden="true"><use href="#i-sparkles"></use></svg>
+            Exposition interactive
+          </p>
+          <h1 class="hero-titre">Panorama comparatif des outils d'<span class="mot-ia">intelligence artificielle</span></h1>
+          <p class="hero-phrase">Découvrons ce que l'intelligence artificielle peut faire à travers trois outils et trois domaines différents.</p>
+          <a class="bouton-principal" href="#mission">Découvrir le panorama
+            <svg class="icone" aria-hidden="true"><use href="#i-arrow-down"></use></svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2 — NOTRE MISSION
+         ============================================================ -->
+    <section id="mission">
+      <div class="conteneur">
+
+        <header class="entete-section">
+          <p class="surtitre-section">Présentation du projet</p>
+          <h2>Notre mission</h2>
+          <p>L'objectif de ce travail est de tester plusieurs outils d'intelligence artificielle afin de comprendre leurs capacités et leurs différences. Nous allons explorer trois domaines : la génération de texte, la création d'images et l'assistance à la programmation.</p>
+        </header>
+
+        <!-- Chaque carte mène à la fiche détaillée de son outil -->
+        <div class="grille-domaines">
+
+          <a class="carte-domaine outil-texte reveal" href="#chatgpt">
+            <span class="icone-domaine"><svg class="icone" aria-hidden="true"><use href="#i-message-square-text"></use></svg></span>
+            <p class="domaine-nom">Texte</p>
+            <h3 class="outil-nom">ChatGPT</h3>
+            <p class="outil-desc">Créer et comprendre du contenu textuel.</p>
+            <span class="carte-lien">Voir la fiche <svg class="icone" aria-hidden="true"><use href="#i-arrow-down"></use></svg></span>
+          </a>
+
+          <a class="carte-domaine outil-image reveal" href="#nano-banana">
+            <span class="icone-domaine"><svg class="icone" aria-hidden="true"><use href="#i-image"></use></svg></span>
+            <p class="domaine-nom">Image</p>
+            <h3 class="outil-nom">Nano Banana</h3>
+            <p class="outil-desc">Créer et modifier des images à partir d'instructions.</p>
+            <span class="carte-lien">Voir la fiche <svg class="icone" aria-hidden="true"><use href="#i-arrow-down"></use></svg></span>
+          </a>
+
+          <a class="carte-domaine outil-code reveal" href="#claude">
+            <span class="icone-domaine"><svg class="icone" aria-hidden="true"><use href="#i-code-xml"></use></svg></span>
+            <p class="domaine-nom">Code</p>
+            <h3 class="outil-nom">Claude</h3>
+            <p class="outil-desc">Analyser, expliquer et générer du code.</p>
+            <span class="carte-lien">Voir la fiche <svg class="icone" aria-hidden="true"><use href="#i-arrow-down"></use></svg></span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3 — LES OUTILS (trois fiches détaillées)
+         Chaque fiche est une <article> identifié : #chatgpt,
+         #nano-banana, #claude. Elles servent aussi de « diapositives »
+         au mode présentation (class="diapo").
+         ============================================================ -->
+    <section id="outils">
+      <div class="conteneur">
+
+        <header class="entete-section">
+          <p class="surtitre-section">Les outils</p>
+          <h2>Trois spécialistes, trois domaines</h2>
+          <p>Chaque outil est présenté de la même façon : ce qu'il est, ce qu'il sait faire, une démonstration concrète, puis ses limites.</p>
+        </header>
+
+        <!-- ══════════ FICHE 1 : CHATGPT ══════════ -->
+        <article id="chatgpt" class="fiche-outil outil-texte diapo reveal">
+
+          <header class="fiche-entete">
+            <span class="fiche-icone"><svg class="icone" aria-hidden="true"><use href="#i-message-square-text"></use></svg></span>
+            <div>
+              <p class="domaine-nom">Domaine : texte</p>
+              <h3 class="fiche-titre">ChatGPT</h3>
+              <p class="fiche-accroche">L'outil avec lequel on discute en langage naturel.</p>
+            </div>
+          </header>
+
+          <h4>Qu'est-ce que ChatGPT ?</h4>
+          <p>ChatGPT est un outil d'intelligence artificielle avec lequel on peut <strong>discuter en langage naturel</strong> : on lui écrit une question ou une consigne comme on parlerait à un humain, et il répond avec du texte. Il a été conçu pour comprendre le langage et produire des réponses utiles.</p>
+
+          <h4>Ce qu'il peut faire</h4>
+          <div class="grille-capacites">
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-pen-line"></use></svg><span>Rédiger</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-file-text"></use></svg><span>Résumer</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-book-open"></use></svg><span>Expliquer</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-languages"></use></svg><span>Traduire</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-spell-check"></use></svg><span>Corriger</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-circle-question-mark"></use></svg><span>Répondre aux questions</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-lightbulb"></use></svg><span>Générer des idées</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-graduation-cap"></use></svg><span>Aider à apprendre</span></div>
+          </div>
+
+          <h4>Exemple</h4>
+          <div class="boite-prompt">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-quote"></use></svg> Prompt</p>
+            <p>Explique le fonctionnement d'Internet à un élève débutant en informatique.</p>
+          </div>
+          <div class="boite-reponse">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-bot"></use></svg> Réponse de l'IA</p>
+            <p>Imagine un réseau de routes qui relie des milliards d'ordinateurs à travers le monde : c'est Internet. Chaque ordinateur peut envoyer des messages à n'importe quel autre. Quand tu regardes une page web, ton ordinateur demande cette page à un autre ordinateur, appelé <em>serveur</em>, qui la lui envoie. Le contenu voyage en petits paquets, comme des lettres à la poste, puis il est réassemblé à l'arrivée. Le <em>navigateur</em> est le logiciel qui lit ces pages et te les affiche. Grâce à ce gigantesque réseau, on peut envoyer des messages, regarder des vidéos ou consulter des informations depuis presque partout dans le monde.</p>
+          </div>
+
+          <h4>Limites</h4>
+          <ul class="liste-points">
+            <li><svg class="icone" aria-hidden="true"><use href="#i-file-x"></use></svg> Peut produire des informations incorrectes — il « invente » parfois.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-shield-check"></use></svg> Les réponses doivent toujours être vérifiées.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-sliders-horizontal"></use></svg> La qualité de la réponse dépend de la qualité de la question posée.</li>
+          </ul>
+        </article>
+
+        <!-- ══════════ FICHE 2 : NANO BANANA ══════════ -->
+        <article id="nano-banana" class="fiche-outil outil-image diapo reveal">
+
+          <header class="fiche-entete">
+            <span class="fiche-icone"><svg class="icone" aria-hidden="true"><use href="#i-image"></use></svg></span>
+            <div>
+              <p class="domaine-nom">Domaine : image</p>
+              <h3 class="fiche-titre">Nano Banana</h3>
+              <p class="fiche-accroche">L'outil qui crée et modifie des images à partir d'instructions.</p>
+            </div>
+          </header>
+
+          <h4>Qu'est-ce que Nano Banana ?</h4>
+          <p>Nano Banana permet de <strong>créer ou modifier des images</strong> à partir d'une simple description écrite, appelée <em>prompt</em>. On décrit ce qu'on veut voir — un objet, un décor, un style — et l'outil dessine l'image correspondante. Il peut aussi reprendre une image existante et la transformer.</p>
+
+          <h4>Ce qu'il peut faire</h4>
+          <div class="grille-capacites">
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-image-plus"></use></svg><span>Créer une image</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-paintbrush"></use></svg><span>Modifier une image</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-layers"></use></svg><span>Changer un arrière-plan</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-wand-sparkles"></use></svg><span>Transformer une image</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-megaphone"></use></svg><span>Créer une affiche</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-move"></use></svg><span>Modifier certains éléments</span></div>
+          </div>
+
+          <h4>Démonstration</h4>
+          <div class="boite-prompt">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-quote"></use></svg> Prompt</p>
+            <p>Crée une affiche moderne pour une entreprise fictive appelée GARAH, spécialisée dans le commerce entre le Cameroun et la République centrafricaine.</p>
+          </div>
+          <figure class="figure-demo">
+            <img src="assets/images/garah-affiche.jpg"
+                 alt="Affiche générée par IA pour l'entreprise GARAH : camion stylisé sur une route commerciale, aux couleurs vert, or et terracotta.">
+            <figcaption>Affiche générée par IA à partir du prompt ci-dessus, en un seul essai. <em>Image générée par IA — tu peux la remplacer par ta propre création (voir le guide de personnalisation).</em></figcaption>
+          </figure>
+
+          <h4>Avant / Après : la modification d'image</h4>
+          <p>Le même camion, avant et après une consigne de modification donnée à l'IA : « Place ce camion sur un fond de studio professionnel et ajoute le nom GARAH sur sa carrosserie. »</p>
+
+          <!-- Curseur Avant/Après : deux images superposées, un <input
+               type="range"> invisible recouvre le tout ; le JavaScript
+               ajuste clip-path pour révéler l'image « avant ». -->
+          <div class="compare" data-compare>
+            <img class="compare-image-apres" src="assets/images/apres.jpg" alt="Camion après modification par IA : fond studio vert et or, logo GARAH sur la carrosserie.">
+            <div class="compare-avant" aria-hidden="true">
+              <img src="assets/images/avant.jpg" alt="">
+            </div>
+            <div class="compare-poignee" aria-hidden="true">
+              <span class="compare-bouton"><svg class="icone" aria-hidden="true"><use href="#i-move-horizontal"></use></svg></span>
+            </div>
+            <span class="compare-etiquette compare-etiquette-avant">Avant</span>
+            <span class="compare-etiquette compare-etiquette-apres">Après</span>
+            <input type="range" min="0" max="100" value="50" class="compare-curseur"
+                   aria-label="Curseur de comparaison avant / après">
+          </div>
+          <p class="note-compare">Fais glisser le curseur (à la souris, au doigt, ou avec les flèches du clavier) pour comparer les deux versions.</p>
+
+          <h4>Limites</h4>
+          <ul class="liste-points">
+            <li><svg class="icone" aria-hidden="true"><use href="#i-wand-sparkles"></use></svg> Le résultat est parfois différent de ce qu'on avait imaginé.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-layers"></use></svg> Certains détails de l'image peuvent être modifiés sans prévenir.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-spell-check"></use></svg> Les textes présents dans les images comportent souvent des erreurs.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-flask-conical"></use></svg> Il faut parfois plusieurs essais pour obtenir le bon résultat.</li>
+          </ul>
+        </article>
+
+        <!-- ══════════ FICHE 3 : CLAUDE ══════════ -->
+        <article id="claude" class="fiche-outil outil-code diapo reveal">
+
+          <header class="fiche-entete">
+            <span class="fiche-icone"><svg class="icone" aria-hidden="true"><use href="#i-code-xml"></use></svg></span>
+            <div>
+              <p class="domaine-nom">Domaine : programmation</p>
+              <h3 class="fiche-titre">Claude</h3>
+              <p class="fiche-accroche">L'assistant qui comprend, écrit et corrige du code.</p>
+            </div>
+          </header>
+
+          <h4>Qu'est-ce que Claude ?</h4>
+          <p>Claude est un outil d'intelligence artificielle qui peut aider un programmeur à <strong>comprendre, écrire, corriger et améliorer du code</strong>. On lui montre du code existant, ou on lui décrit un besoin en langage naturel, et il propose du code, des explications et des corrections.</p>
+
+          <h4>Ce qu'il peut faire</h4>
+          <div class="grille-capacites">
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-code"></use></svg><span>Écrire du code</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-book-open"></use></svg><span>Expliquer du code</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-bug"></use></svg><span>Rechercher des erreurs</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-wrench"></use></svg><span>Corriger du code</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-lightbulb"></use></svg><span>Proposer des solutions</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-test-tube"></use></svg><span>Générer des tests</span></div>
+            <div class="capacite"><svg class="icone" aria-hidden="true"><use href="#i-folder-search"></use></svg><span>Analyser plusieurs fichiers</span></div>
+          </div>
+
+          <h4>Démonstration</h4>
+          <div class="boite-prompt">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-quote"></use></svg> Prompt</p>
+            <p>Crée une classe Java Product avec un identifiant, un nom, un prix et une quantité. Explique ensuite le code simplement.</p>
+          </div>
+
+          <!-- Fenêtre de code : la coloration est faite par Prism,
+               une bibliothèque locale (assets/vendor/prism/).
+               La classe CSS "language-java" déclenche la coloration. -->
+          <div class="fenetre-code">
+            <div class="fenetre-code-entete">
+              <svg class="icone" aria-hidden="true"><use href="#i-terminal"></use></svg>
+              <span>Product.java</span>
+              <span class="fenetre-code-langage">Java</span>
+            </div>
+            <pre><code class="language-java">public class Product {
+
+    // Les attributs : les informations mémorisées par un produit
+    private int identifiant;
+    private String nom;
+    private double prix;
+    private int quantite;
+
+    // Le constructeur : comment créer un nouveau produit
+    public Product(int identifiant, String nom, double prix, int quantite) {
+        this.identifiant = identifiant;
+        this.nom = nom;
+        this.prix = prix;
+        this.quantite = quantite;
+    }
+
+    // Les getters : lire les informations
+    public int getIdentifiant() { return identifiant; }
+    public String getNom()      { return nom; }
+    public double getPrix()     { return prix; }
+    public int getQuantite()    { return quantite; }
+
+    // Les setters : modifier les informations
+    public void setPrix(double prix)       { this.prix = prix; }
+    public void setQuantite(int quantite)  { this.quantite = quantite; }
+
+    // Une méthode « métier » : la valeur totale du stock
+    public double valeurStock() {
+        return prix * quantite;
+    }
+
+    // Un affichage lisible pour un humain
+    @Override
+    public String toString() {
+        return nom + " (" + quantite + " x " + prix + " FCFA)";
+    }
+}</code></pre>
+          </div>
+
+          <!-- Le bouton affiche/cache l'explication (voir js/outils.js) -->
+          <button type="button" class="bouton-explication" id="btn-explication" aria-expanded="false" aria-controls="explication-code">
+            <svg class="icone" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+            <span class="btn-explication-texte">Voir l'explication</span>
+          </button>
+
+          <div class="explication" id="explication-code">
+            <h4>L'explication du code, simplement</h4>
+            <ul class="liste-points">
+              <li><svg class="icone" aria-hidden="true"><use href="#i-book-open"></use></svg> <strong>La classe <code>Product</code> est un modèle</strong> (un « plan ») : elle décrit ce qu'est un produit, mais elle n'est pas un produit en soi. C'est à partir d'elle qu'on fabriquera de vrais produits.</li>
+              <li><svg class="icone" aria-hidden="true"><use href="#i-shield-check"></use></svg> <strong>Ses quatre attributs sont <code>private</code></strong> : on ne peut pas les modifier directement de l'extérieur. C'est le principe d'<em>encapsulation</em>.</li>
+              <li><svg class="icone" aria-hidden="true"><use href="#i-wrench"></use></svg> <strong>Le constructeur</strong> (méthode qui porte le nom de la classe) indique comment créer un produit en donnant ses valeurs de départ.</li>
+              <li><svg class="icone" aria-hidden="true"><use href="#i-languages"></use></svg> <strong>Les getters et les setters</strong> sont les portes d'entrée contrôlées : ils permettent de lire et de modifier proprement les informations.</li>
+              <li><svg class="icone" aria-hidden="true"><use href="#i-lightbulb"></use></svg> <strong><code>valeurStock()</code></strong> est une méthode « métier » : elle calcule quelque chose d'utile (prix × quantité), et <strong><code>toString()</code></strong> renvoie un affichage lisible.</li>
+            </ul>
+          </div>
+
+          <h4>Limites</h4>
+          <ul class="liste-points">
+            <li><svg class="icone" aria-hidden="true"><use href="#i-bug"></use></svg> Le code produit peut contenir des erreurs.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-scale"></use></svg> Une solution proposée n'est pas toujours la plus optimale.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-test-tube"></use></svg> Il faut toujours tester le code avant de l'utiliser.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-user-check"></use></svg> L'utilisateur doit comprendre ce qu'il utilise.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4 — UNE MÊME IDÉE, TROIS IA
+         Le projet fictif GARAH, traité successivement par les
+         trois outils : même point de départ, trois types de résultats.
+         ============================================================ -->
+    <section id="idee">
+      <div class="conteneur">
+
+        <header class="entete-section">
+          <p class="surtitre-section">Mise en scène</p>
+          <h2>Une même idée, trois IA</h2>
+          <p>Prenons une seule idée — <strong>GARAH</strong>, une entreprise fictive de commerce entre le Cameroun et la République centrafricaine — et demandons-la aux trois outils.</p>
+        </header>
+
+        <div class="idee-origine reveal">
+          <span class="icone-domaine"><svg class="icone" aria-hidden="true"><use href="#i-store"></use></svg></span>
+          <p class="domaine-nom">Une idée</p>
+          <h3 class="outil-nom">GARAH</h3>
+          <p class="idee-origine-desc">Entreprise fictive de commerce entre le Cameroun et la République centrafricaine.</p>
+          <p class="idee-origine-prec"><svg class="icone" aria-hidden="true"><use href="#i-arrow-right-left"></use></svg> Douala <span aria-hidden="true">↔</span> Bangui</p>
+        </div>
+
+        <div class="idee-fleches" aria-hidden="true">
+          <svg class="icone"><use href="#i-arrow-down"></use></svg>
+          <svg class="icone"><use href="#i-arrow-down"></use></svg>
+          <svg class="icone"><use href="#i-arrow-down"></use></svg>
+        </div>
+
+        <div class="idee-resultats">
+          <article class="idee-carte outil-texte reveal">
+            <header class="idee-entete">
+              <svg class="icone" aria-hidden="true"><use href="#i-message-square-text"></use></svg>
+              <div>
+                <h3>ChatGPT</h3>
+                <p class="domaine-nom">Produit un texte</p>
+              </div>
+            </header>
+            <blockquote class="idee-resultat-texte">
+              « GARAH connecte les commerçants du Cameroun et de République centrafricaine. Fiabilité, rapidité et confiance : notre équipe organise le transport et la livraison de vos marchandises de Douala à Bangui, avec un suivi simple et transparent. Avec GARAH, le commerce transfrontalier devient enfin simple. »
+            </blockquote>
+          </article>
+
+          <article class="idee-carte outil-image reveal">
+            <header class="idee-entete">
+              <svg class="icone" aria-hidden="true"><use href="#i-image"></use></svg>
+              <div>
+                <h3>Nano Banana</h3>
+                <p class="domaine-nom">Produit une image</p>
+              </div>
+            </header>
+            <img class="idee-resultat-image" src="assets/images/garah-affiche.jpg"
+                 alt="Affiche publicitaire GARAH générée par IA.">
+          </article>
+
+          <article class="idee-carte outil-code reveal">
+            <header class="idee-entete">
+              <svg class="icone" aria-hidden="true"><use href="#i-code-xml"></use></svg>
+              <div>
+                <h3>Claude</h3>
+                <p class="domaine-nom">Produit du code</p>
+              </div>
+            </header>
+            <div class="fenetre-code fenetre-code-mini">
+              <div class="fenetre-code-entete">
+                <svg class="icone" aria-hidden="true"><use href="#i-terminal"></use></svg>
+                <span>Garah.java</span>
+              </div>
+              <pre><code class="language-java">public record Garah(String origine,
+                    String destination) {
+    public String itineraire() {
+        return origine + " - " + destination;
+    }
+}
+// Garah trajet = new Garah("Douala", "Bangui");</code></pre>
+            </div>
+          </article>
+        </div>
+
+        <p class="idee-conclusion">
+          <svg class="icone" aria-hidden="true"><use href="#i-lightbulb"></use></svg>
+          Même point de départ, trois résultats de natures différentes : un <strong>texte</strong>, une <strong>image</strong>, du <strong>code</strong>. Ce n'est pas l'outil qui « sait tout faire » : c'est la <strong>tâche demandée</strong>, confiée au bon outil, qui détermine le résultat.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5 — EXPÉRIMENTONS ! (onglets Texte | Image | Code)
+         Un seul panneau visible à la fois : le JavaScript
+         (js/experiences.js) ajoute la classe « actif ».
+         ============================================================ -->
+    <section id="experiences">
+      <div class="conteneur">
+
+        <header class="entete-section">
+          <p class="surtitre-section">Expérimentons !</p>
+          <h2>Trois expériences, une par domaine</h2>
+          <p>Cliquez sur un onglet pour découvrir l'expérience réalisée avec chaque outil : le prompt envoyé, le résultat obtenu, et ce qu'il faut en retenir.</p>
+        </header>
+
+        <!-- role="tablist" : zone d'onglets (accessibilité) -->
+        <div class="onglets" role="tablist" aria-label="Expériences par domaine">
+          <button type="button" class="onglet actif" role="tab" id="onglet-texte"
+                  aria-controls="panneau-texte" aria-selected="true" data-cible="panneau-texte" data-outil="texte">
+            <svg class="icone" aria-hidden="true"><use href="#i-message-square-text"></use></svg> Texte
+          </button>
+          <button type="button" class="onglet" role="tab" id="onglet-image"
+                  aria-controls="panneau-image" aria-selected="false" tabindex="-1" data-cible="panneau-image" data-outil="image">
+            <svg class="icone" aria-hidden="true"><use href="#i-image"></use></svg> Image
+          </button>
+          <button type="button" class="onglet" role="tab" id="onglet-code"
+                  aria-controls="panneau-code" aria-selected="false" tabindex="-1" data-cible="panneau-code" data-outil="code">
+            <svg class="icone" aria-hidden="true"><use href="#i-code-xml"></use></svg> Code
+          </button>
+        </div>
+
+        <!-- ── Panneau TEXTE ── -->
+        <div class="panneau actif" id="panneau-texte" role="tabpanel"
+             aria-labelledby="onglet-texte">
+          <p class="experience-meta">
+            <span><strong>Outil :</strong> ChatGPT</span>
+            <span><strong>Domaine :</strong> texte</span>
+          </p>
+
+          <div class="boite-prompt">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-quote"></use></svg> Prompt</p>
+            <p>Explique ce qu'est Internet à un élève de Terminale.</p>
+          </div>
+
+          <div class="boite-reponse">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-bot"></use></svg> Réponse de l'IA</p>
+            <p>Internet est un réseau mondial : des millions de machines (ordinateurs, serveurs, téléphones) reliées par des câbles sous-marins, de la fibre optique et des liaisons satellites. Les échanges y sont découpés en <em>paquets</em> qui transitent selon des règles communes, les protocoles <strong>TCP/IP</strong>. Quand tu tapes une adresse dans ton navigateur, une requête part vers le <em>serveur</em> qui héberge le site ; le serveur renvoie les fichiers de la page (HTML, CSS, JavaScript) et le navigateur les assemble pour l'afficher. Ton fournisseur d'accès (FAI) est la porte d'entrée qui te connecte à ce réseau.</p>
+          </div>
+
+          <h4>Ce que nous observons</h4>
+          <p>L'IA a employé un vocabulaire technique — <em>protocoles TCP/IP, serveur, FAI, paquets</em> — adapté à un niveau de Terminale. Comparez avec la réponse « débutant » de la fiche ChatGPT : c'est le même sujet, mais l'explication change complètement de niveau.</p>
+
+          <div class="apprentissage">
+            <svg class="icone" aria-hidden="true"><use href="#i-sparkles"></use></svg>
+            <p><strong>Ce que cette expérience nous apprend :</strong> l'IA peut adapter son explication au niveau de la personne qui pose la question.</p>
+          </div>
+        </div>
+
+        <!-- ── Panneau IMAGE ── -->
+        <div class="panneau" id="panneau-image" role="tabpanel" aria-labelledby="onglet-image" hidden>
+          <p class="experience-meta">
+            <span><strong>Outil :</strong> Nano Banana</span>
+            <span><strong>Domaine :</strong> image</span>
+          </p>
+
+          <div class="boite-prompt">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-quote"></use></svg> Prompt</p>
+            <p>Place ce camion sur un fond de studio professionnel et ajoute le nom GARAH sur sa carrosserie.</p>
+          </div>
+
+          <figure class="figure-demo">
+            <img src="assets/images/apres.jpg"
+                 alt="Camion après modification par IA : fond studio vert et or, nom GARAH sur la carrosserie.">
+            <figcaption>Résultat obtenu à partir de la photo d'origine. Comparez avec la version « Avant » grâce au curseur de la fiche Nano Banana.</figcaption>
+          </figure>
+
+          <h4>Ce que nous observons</h4>
+          <p>L'IA a compris la consigne de modification : elle a conservé le camion et remplacé son environnement. Mais regardons bien les détails — les reflets, les lettres du logo — tout n'est pas parfait. Une consigne plus précise (« garde les roues telles quelles », « police verte en majuscules ») donne généralement un résultat plus fidèle.</p>
+
+          <div class="apprentissage">
+            <svg class="icone" aria-hidden="true"><use href="#i-sparkles"></use></svg>
+            <p><strong>Ce que cette expérience nous apprend :</strong> une modification d'image réussie demande une consigne précise : quel élément garder, quoi changer, dans quel style.</p>
+          </div>
+        </div>
+
+        <!-- ── Panneau CODE ── -->
+        <div class="panneau" id="panneau-code" role="tabpanel" aria-labelledby="onglet-code" hidden>
+          <p class="experience-meta">
+            <span><strong>Outil :</strong> Claude</span>
+            <span><strong>Domaine :</strong> programmation</span>
+          </p>
+
+          <div class="boite-prompt">
+            <p class="boite-etiquette"><svg class="icone" aria-hidden="true"><use href="#i-quote"></use></svg> Prompt</p>
+            <p>Écris une fonction JavaScript qui calcule la moyenne des notes d'un élève, puis explique-la.</p>
+          </div>
+
+          <div class="fenetre-code">
+            <div class="fenetre-code-entete">
+              <svg class="icone" aria-hidden="true"><use href="#i-terminal"></use></svg>
+              <span>moyenne.js</span>
+              <span class="fenetre-code-langage">JavaScript</span>
+            </div>
+            <pre><code class="language-javascript">function moyenne(notes) {
+  if (notes.length === 0) {
+    return 0; // pas de note : la moyenne vaut 0
+  }
+  let somme = 0;
+  for (const note of notes) {
+    somme += note;
+  }
+  return somme / notes.length;
+}
+
+// Exemple d'utilisation :
+// moyenne([12, 15, 9]) renvoie 12</code></pre>
+          </div>
+
+          <h4>Ce que nous observons</h4>
+          <p>L'IA a prévu le cas particulier de la liste vide, choisi des noms de variables clairs, commenté le code et ajouté un exemple d'utilisation. Le code paraît correct… mais il faut encore le <strong>tester</strong> : c'est la règle numéro un avec du code généré par IA.</p>
+
+          <div class="apprentissage">
+            <svg class="icone" aria-hidden="true"><use href="#i-sparkles"></use></svg>
+            <p><strong>Ce que cette expérience nous apprend :</strong> l'IA peut produire du code propre et commenté — mais c'est à l'utilisateur de le vérifier et de le tester.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6 — COMPARAISON
+         Règle du projet : PAS de classement, PAS de gagnant.
+         On montre uniquement les différences de capacités.
+         ============================================================ -->
+    <section id="comparaison">
+      <div class="conteneur">
+
+        <header class="entete-section">
+          <p class="surtitre-section">Tableau</p>
+          <h2>Comparaison des trois outils</h2>
+          <p>Ce tableau ne désigne <strong>aucun gagnant</strong> : chaque outil est spécialisé dans son domaine. Il montre simplement ce que chacun peut faire.</p>
+        </header>
+
+        <div class="tableau-ombre reveal">
+          <table class="tableau-comparatif">
+            <caption class="sr-only">Comparaison des fonctionnalités de ChatGPT, Nano Banana et Claude</caption>
+            <thead>
+              <tr>
+                <th scope="col">Fonctionnalité</th>
+                <th scope="col" class="col-chatgpt">ChatGPT</th>
+                <th scope="col" class="col-nano">Nano Banana</th>
+                <th scope="col" class="col-claude">Claude</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Texte</th>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Images</th>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Modification d'images</th>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Code</th>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Explication</th>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Analyse de code</th>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Création graphique</th>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+                <td class="cellule-oui"><svg class="icone" aria-hidden="true"><use href="#i-check"></use></svg><span class="sr-only">Oui</span></td>
+                <td class="cellule-non"><svg class="icone" aria-hidden="true"><use href="#i-minus"></use></svg><span class="sr-only">Non</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="note-comparaison">
+          <svg class="icone" aria-hidden="true"><use href="#i-circle-alert"></use></svg>
+          Ce tableau compare des <strong>capacités</strong>, pas la « qualité » des outils : il n'y a pas de gagnant, seulement des <strong>spécialités différentes</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7 — CE QUE NOUS AVONS APPRIS
+         ============================================================ -->
+    <section id="appris">
+      <div class="conteneur">
+
+        <header class="entete-section">
+          <p class="surtitre-section">Bilan</p>
+          <h2>Ce que nous avons appris</h2>
+          <p>Cinq observations à retenir de tout ce travail.</p>
+        </header>
+
+        <ol class="liste-lecons">
+          <li class="lecon reveal">
+            <svg class="icone" aria-hidden="true"><use href="#i-message-square-text"></use></svg>
+            <h3>L'IA peut comprendre des instructions</h3>
+            <p>Nous pouvons donner une consigne en langage naturel, comme à un humain.</p>
+          </li>
+          <li class="lecon reveal">
+            <svg class="icone" aria-hidden="true"><use href="#i-layers"></use></svg>
+            <h3>L'IA peut produire différents types de contenus</h3>
+            <p>Texte, image ou code : cela dépend de l'outil utilisé et de la tâche demandée.</p>
+          </li>
+          <li class="lecon reveal">
+            <svg class="icone" aria-hidden="true"><use href="#i-sliders-horizontal"></use></svg>
+            <h3>La qualité de la demande est importante</h3>
+            <p>Une consigne précise permet généralement d'obtenir un résultat plus adapté.</p>
+          </li>
+          <li class="lecon reveal">
+            <svg class="icone" aria-hidden="true"><use href="#i-triangle-alert"></use></svg>
+            <h3>L'IA n'est pas infaillible</h3>
+            <p>Elle se trompe, elle invente : les résultats doivent être vérifiés.</p>
+          </li>
+          <li class="lecon reveal">
+            <svg class="icone" aria-hidden="true"><use href="#i-user-check"></use></svg>
+            <h3>L'utilisateur reste important</h3>
+            <p>L'IA est un outil d'assistance : l'utilisateur doit comprendre et contrôler le résultat.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8 — LES LIMITES DE L'IA
+         Style visuel volontairement différent : couleur d'alerte,
+         pour marquer les esprits à la fin de l'exposé.
+         ============================================================ -->
+    <section id="limites" class="section-limites">
+      <div class="conteneur">
+
+        <header class="entete-limites">
+          <p class="surtitre-limites">
+            <svg class="icone" aria-hidden="true"><use href="#i-triangle-alert"></use></svg>
+            Attention
+          </p>
+          <h2>Les limites de l'intelligence artificielle</h2>
+        </header>
+
+        <blockquote class="citation-limites">
+          « Une réponse produite par une IA n'est pas automatiquement une réponse correcte. »
+        </blockquote>
+
+        <ul class="liste-limites">
+          <li class="item-limite"><svg class="icone" aria-hidden="true"><use href="#i-bug"></use></svg><span>Des erreurs sont possibles, même dans un ton très sûr.</span></li>
+          <li class="item-limite"><svg class="icone" aria-hidden="true"><use href="#i-file-x"></use></svg><span>Des informations peuvent être inventées ou incorrectes.</span></li>
+          <li class="item-limite"><svg class="icone" aria-hidden="true"><use href="#i-search-x"></use></svg><span>La consigne peut être mal interprétée.</span></li>
+          <li class="item-limite"><svg class="icone" aria-hidden="true"><use href="#i-image-off"></use></svg><span>Les résultats visuels peuvent être imparfaits.</span></li>
+          <li class="item-limite"><svg class="icone" aria-hidden="true"><use href="#i-file-code"></use></svg><span>Le code généré peut contenir des erreurs.</span></li>
+          <li class="item-limite"><svg class="icone" aria-hidden="true"><use href="#i-shield-check"></use></svg><span>Vérifier les résultats reste indispensable.</span></li>
+        </ul>
+
+        <p class="note-limites">Utilisée avec esprit critique, l'intelligence artificielle est un formidable assistant. La clé, c'est de rester <strong>celui qui réfléchit</strong>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       PIED DE PAGE — l'année est mise à jour par js/main.js
+       ============================================================ -->
+  <footer class="pied-de-page">
+    <div class="conteneur">
+      <p><strong>Panorama comparatif des outils d'intelligence artificielle</strong></p>
+      <p>GNIZO GREZOUALI ISRAEL — Terminale A · Lycée Bilingue d'Ekounou · Cours d'Informatique · <span id="annee">2026</span></p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BARRE DU MODE PRÉSENTATION
+       Cachée normalement ; visible uniquement quand <body> porte
+       la classe « mode-presentation » (voir css/presentation.css).
+       ============================================================ -->
+  <div class="barre-presentation" role="toolbar" aria-label="Contrôles du mode présentation">
+    <button type="button" class="btn-diapo" id="diapo-prec" title="Diapositive précédente (flèche gauche)">
+      <svg class="icone" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+      <span class="sr-only">Diapositive précédente</span>
+    </button>
+    <span class="diapo-compteur" id="diapo-compteur" aria-live="polite">1 / 10</span>
+    <button type="button" class="btn-diapo" id="diapo-suiv" title="Diapositive suivante (flèche droite)">
+      <svg class="icone" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+      <span class="sr-only">Diapositive suivante</span>
+    </button>
+    <span class="diapo-separateur" aria-hidden="true"></span>
+    <button type="button" class="btn-diapo" id="diapo-quitter" title="Quitter le mode présentation (Esc)">
+      <svg class="icone" aria-hidden="true"><use href="#i-x"></use></svg>
+      <span class="sr-only">Quitter le mode présentation</span>
+    </button>
+  </div>
+  <p class="diapo-aide" aria-hidden="true">
+    <svg class="icone"><use href="#i-keyboard"></use></svg>
+    flèche gauche : précédent · flèche droite : suivant · Esc : quitter
+  </p>
+
+  <!-- Les scripts : d'abord les nôtres, puis la bibliothèque Prism
+       (coloration syntaxique) qui termine le travail sur le code. -->
+  <script src="js/main.js"></script>
+  <script src="js/outils.js"></script>
+  <script src="js/experiences.js"></script>
+  <script src="js/presentation.js"></script>
+  <script src="assets/vendor/prism/prism.js"></script>
+  <script src="assets/vendor/prism/prism-java.min.js"></script>
+</body>
+</html>
