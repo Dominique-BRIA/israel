@@ -107,8 +107,15 @@
   height: 100%;
   object-fit: cover; /* l'image remplit le cercle sans se déformer */
   border-radius: 50%;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4); /* ombre douce */
 }
 
+/* :has(img) = « qui contient une balise <img> » : dès que la
+   photo est là, le cadre en pointillés devient un anneau coloré */
+.cadre-photo:has(img) {
+  border: 3px solid var(--accent-general);
+  background-color: transparent;
+}
 .cadre-photo-texte {
   font-size: 0.68rem;
   letter-spacing: 0.08em;
